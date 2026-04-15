@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                python data_dev/main.py
+                PYTHONPATH=. python data_dev/main.py
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html
+                PYTHONPATH=. pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html
                 '''
             }
         }
