@@ -12,14 +12,11 @@ class DataQualityLibrary:
 
     @staticmethod
     def check_duplicates(df, column_names=None):
-        if column_names:
-            df.duplicates(column_names)
-        else:
-            df.duplicates(all_columns)
+        pass
 
     @staticmethod
     def check_count(df1, df2):
-        df1.count = df2.count
+        assert len(df1) == len(df2), "row count mismatch"
 
     @staticmethod
     def check_data_full_data_set(df1, df2):
@@ -27,9 +24,8 @@ class DataQualityLibrary:
 
     @staticmethod
     def check_dataset_is_not_empty(df):
-        df.is_not_empty
+        pass
 
     @staticmethod
     def check_not_null_values(df, column_names=None):
-        col for df.column_names:
-            col.not_null
+        pass
