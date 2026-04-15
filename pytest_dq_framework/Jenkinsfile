@@ -9,7 +9,7 @@ pipeline {
                 python3 -m venv venv
                 . venv/bin/activate
                 pip install -r pytest_dq_framework/requirements.txt
-                pip install psycopg2-binary
+                pip install psycopg2-binary pandas faker plotly pyarrow
                 '''
             }
         }
