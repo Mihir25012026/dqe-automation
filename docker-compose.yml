@@ -16,15 +16,15 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build: .
     container_name: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-
-
+    networks:
+      - tafordqenetwork   # ✅ THIS LINE IS REQUIRED
 
 networks:
   tafordqenetwork:
