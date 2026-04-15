@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r pytest_dq_framework/requirements.txt'
+            }
+        }
+
+        stage('Run Data Pipeline') {
+            steps {
+                sh 'python data_dev/main.py'
+            }
+        }
+
+        stage('Run Pytest') {
+            steps {
+                sh 'pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html'
+            }
+        }
+
+    }
+}
