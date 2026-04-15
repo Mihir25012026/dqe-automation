@@ -5,19 +5,29 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r pytest_dq_framework/requirements.txt'
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r pytest_dq_framework/requirements.txt
+                '''
             }
         }
 
         stage('Run Data Pipeline') {
             steps {
-                sh 'python data_dev/main.py'
+                sh '''
+                . venv/bin/activate
+                python data_dev/main.py
+                '''
             }
         }
 
         stage('Run Pytest') {
             steps {
-                sh 'pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html'
+                sh '''
+                . venv/bin/activate
+                pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html
+                '''
             }
         }
 
