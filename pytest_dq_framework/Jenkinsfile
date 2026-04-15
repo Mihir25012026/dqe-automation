@@ -32,7 +32,7 @@ pipeline {
 --db_name=postgres \
 --db_port=5432 \
 --db_user=postgres \
---db_password=postgres \
+--db_password=mypassword \
 --html=pytest_dq_framework/report.html
                 '''
             }
