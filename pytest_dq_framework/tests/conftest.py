@@ -1,6 +1,6 @@
 import pytest
 
-from connectors.postgres.postgres_connector import PostgresConnectorContextManager
+from pytest_dq_framework.src.connectors.postgres.postgres_connector import PostgresConnectorContextManager
 from pytest_dq_framework.src.connectors.file_system.parquet_reader import ParquetReader
 
 def pytest_addoption(parser):
