@@ -27,7 +27,13 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                PYTHONPATH=. pytest pytest_dq_framework/tests --html=pytest_dq_framework/report.html
+                PYTHONPATH=. pytest pytest_dq_framework/tests \
+--db_host=postgres \
+--db_name=postgres \
+--db_port=5432 \
+--db_user=postgres \
+--db_password=postgres \
+--html=pytest_dq_framework/report.html
                 '''
             }
         }
