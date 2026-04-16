@@ -1,47 +1,42 @@
 pipeline {
-agent any
+    agent any
 
-```
-stages {
+    stages {
 
-    stage('Install Dependencies') {
-        steps {
-            sh '''
-            python3 -m venv venv
-            . venv/bin/activate
-
-            pip install --upgrade pip
-            pip install -r pytest_dq_framework/requirements.txt
-            pip install psycopg2-binary pandas faker plotly pyarrow pytest pytest-html
-            '''
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r pytest_dq_framework/requirements.txt
+                pip install psycopg2-binary pandas faker plotly pyarrow pytest pytest-html
+                '''
+            }
         }
-    }
 
-    stage('Run Data Pipeline') {
-        steps {
-            sh '''
-            . venv/bin/activate
-            PYTHONPATH=. python data_dev/main.py
-            '''
+        stage('Run Data Pipeline') {
+            steps {
+                sh '''
+                . venv/bin/activate
+                PYTHONPATH=. python data_dev/main.py
+                '''
+            }
         }
-    }
 
-    stage('Run Pytest') {
-        steps {
-            sh '''
-            . venv/bin/activate
-            PYTHONPATH=. pytest pytest_dq_framework/tests \
-            --db_host=postgres \
-            --db_name=mydatabase \
-            --db_port=5432 \
-            --db_user=myuser \
-            --db_password=mypassword \
-            --html=pytest_dq_framework/report.html
-            '''
+        stage('Run Pytest') {
+            steps {
+                sh '''
+                . venv/bin/activate
+                PYTHONPATH=. pytest pytest_dq_framework/tests \
+                --db_host=postgres \
+                --db_name=mydatabase \
+                --db_port=5432 \
+                --db_user=myuser \
+                --db_password=mypassword \
+                --html=pytest_dq_framework/report.html
+                '''
+            }
         }
+
     }
-
-}
-```
-
 }
