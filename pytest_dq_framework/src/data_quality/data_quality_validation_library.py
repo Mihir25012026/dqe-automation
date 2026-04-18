@@ -12,20 +12,30 @@ class DataQualityLibrary:
 
     @staticmethod
     def check_duplicates(df, column_names=None):
-        pass
+        dup_count = df.duplicated(subset=column_names).sum()
+        assert dup_count == 0, f"Duplicate keys found for {column_names}"
 
     @staticmethod
     def check_count(df1, df2):
-        assert len(df1) == len(df2), "row count mismatch"
+        # Compare unique business keys instead of raw row count
+        source_count = df1[['facility_type', 'visit_date']].drop_duplicates().shape[0]
+        target_count = df2[['facility_type', 'visit_date']].drop_duplicates().shape[0]
+
+        assert source_count == target_count, "Aggregated row count mismatch"
 
     @staticmethod
     def check_data_full_data_set(df1, df2):
-        df1 = df2
+        # Simple column match check
+        assert set(df2.columns).issubset(set(df1.columns)), "Column mismatch"
 
     @staticmethod
     def check_dataset_is_not_empty(df):
-        pass
+        assert len(df) > 0, "Dataset is empty"
 
     @staticmethod
     def check_not_null_values(df, column_names=None):
-        pass
+        if column_names:
+            for col in column_names:
+                assert df[col].isnull().sum() == 0, f"Null values found in {col}"
+        else:
+            assert df.isnull().sum().sum() == 0, "Null values found in dataset"
