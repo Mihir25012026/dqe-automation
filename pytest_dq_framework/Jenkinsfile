@@ -37,13 +37,12 @@ pipeline {
                 '''
             }
         }
-
     }
-}
 
 
     post {
         always {
-            archiveArtifacts artifacts: 'pytest_dq_framework/report.html', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'pytest_dq_framework/**/*', allowEmptyArchive: true
         }
     }
+}
