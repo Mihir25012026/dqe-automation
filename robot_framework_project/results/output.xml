@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.12.6 on win32)" generated="2026-05-04T11:03:01.919075" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\PycharmProjects\dqe_automation-new\robot_framework_project\test.robot">
+<test id="s1-t1" name="Compare HTML Table With Parquet Data" line="12">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-05-04T11:03:02.655053" level="INFO">Opening browser 'chrome' to base url 'file:///C:/PycharmProjects/dqe_automation-new/robot_framework_project/report.html'.</msg>
+<arg>${REPORT_FILE}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-05-04T11:03:02.655053" elapsed="4.375107"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-05-04T11:03:07.030160" elapsed="0.051729"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>class:table</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-05-04T11:03:07.100072" elapsed="0.072753"/>
+</kw>
+<kw name="Read Html Table" owner="helper">
+<msg time="2026-05-04T11:03:08.874959" level="INFO">C:\PycharmProjects\dqe_automation-new\robot_framework_project\helper.py:26: UserWarning: Parsing dates in %Y-%m-%d format when dayfirst=True was specified. Pass `dayfirst=False` or specify a format to silence this warning.
+  df['Visit Date'] = pd.to_datetime(df['Visit Date'], dayfirst=True)</msg>
+<msg time="2026-05-04T11:03:08.888465" level="INFO">${html_df} =        Facility Type Visit Date  Average Time Spent
+0           Hospital 2026-04-18               49.50
+1             Clinic 2026-04-18               41.50
+2           Hospital 2026-04-18             ...</msg>
+<var>${html_df}</var>
+<status status="PASS" start="2026-05-04T11:03:07.176120" elapsed="1.714353"/>
+</kw>
+<kw name="Read Parquet Data" owner="helper">
+<msg time="2026-05-04T11:03:09.572436" level="INFO">${parquet_df} =           Facility Type Visit Date  Average Time Spent
+25346            Clinic 2026-04-09               57.00
+25347          Hospital 2026-04-07               43.33
+25348            Clinic 2026-04-08 ...</msg>
+<var>${parquet_df}</var>
+<arg>${PARQUET_FOLDER}</arg>
+<arg>${FILTER_DATE}</arg>
+<status status="PASS" start="2026-05-04T11:03:08.890473" elapsed="0.681963"/>
+</kw>
+<kw name="Compare Dataframes" owner="helper">
+<msg time="2026-05-04T11:03:09.578466" level="INFO">${result} = False</msg>
+<msg time="2026-05-04T11:03:09.578466" level="INFO">${diff} = Row count mismatch: HTML=21, Parquet=51</msg>
+<var>${result}</var>
+<var>${diff}</var>
+<arg>${html_df}</arg>
+<arg>${parquet_df}</arg>
+<status status="PASS" start="2026-05-04T11:03:09.574448" elapsed="0.004018"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2026-05-04T11:03:09.580478" level="FAIL">Data mismatch found: Row count mismatch: HTML=21, Parquet=51</msg>
+<arg>Data mismatch found: ${diff}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2026-05-04T11:03:09.580478" elapsed="0.002011">Data mismatch found: Row count mismatch: HTML=21, Parquet=51</status>
+</kw>
+<arg>'${result}' == 'False'</arg>
+<arg>Fail</arg>
+<arg>Data mismatch found: ${diff}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2026-05-04T11:03:09.580478" elapsed="0.002011">Data mismatch found: Row count mismatch: HTML=21, Parquet=51</status>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2026-05-04T11:03:09.582489" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-05-04T11:03:02.651714" elapsed="6.930775">Data mismatch found: Row count mismatch: HTML=21, Parquet=51</status>
+</test>
+<status status="FAIL" start="2026-05-04T11:03:01.919075" elapsed="7.665425"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="0" fail="1" skip="0">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
